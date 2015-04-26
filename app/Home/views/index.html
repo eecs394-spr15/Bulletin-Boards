@@ -73,7 +73,7 @@
             </super-navigate>
             <i class = "icon super-heart-broken" style="font-size: 25px; float: right; padding-right: 10px" onclick="addDislikeNum('<%=testId%>')"></i>
             <i class = "icon super-heart" style="font-size: 25px; float: right; padding-right: 20px" onclick="addLikeNum('<%=testId%>')"></i>
-            <i class = "icon super-email" style="font-size: 25px; float: right; padding-right: 20px" onclick="sendEmail()"></i>
+            <i class = "icon super-email" style="font-size: 25px; float: right; padding-right: 20px" onclick="sendEmail('<%=study%>', '<%=location%>')"></i>
           </div>
         </li>
       </div>
@@ -211,65 +211,49 @@
 
     }
 
+    function sendEmail(stu, loc)
+    {
+      if(confirm("Are you sure you want to send the email?"))
+      {
+      $.ajax(
+      {
+         type: "POST",
+         url: "https://mandrillapp.com/api/1.0/messages/send.json",
+          data: {
+            "key": "qgQsrDwIdACZ55h8AzrqIA",
+            "message": {
+                "from_email": "varunk93@hotmail.com",
+                "from_name": "Student",
+                "to": [
+                    {
+                        "email": "varunk93@hotmail.com",
+                        "name": "Professor",
+                        "type": "to",
+                    }
+                      ],
+                      "autotext": 'true',
+                      "subject": "Research - " + stu,
+                      "html": "Hello, I am interested in the research study, " + stu + ", located at " + loc + ". Please contact me."
+                  }
+            }
+      }).done(function(response) {
+       console.log(response); // if you're into that sorta thing
+     });
+      alert("SENT");
+    }
+    }
 
 
    </script>
 
 
    <script>
-   function sendEmail()
-   {
-     var EMAIL_ADDRESS = "";
-     window.open("mailto:" + EMAIL_ADDRESS);
-   };
 
 
 
-alert('a');
 
-function test()
-{
-  if(confirm("Are you sure you want to send the email?"))
-  {
-  $.ajax(
-  {
-     type: "POST",
-     url: "https://mandrillapp.com/api/1.0/messages/send.json",
-      data: {
-        "key": "qgQsrDwIdACZ55h8AzrqIA",
-        "message": {
-            "html": "<p>Example HTML content</p>",
-            "text": "Example text content",
-            "subject": "Research about " 
-            "from_email": "varunk93@hotmail.com",
-            "from_name": "Student",
-            "to": [
-                {
-                    "email": "varunk93@hotmail.com",
-                    "name": "Professor",
-                    "type": "to"
-                }
-                  ],
-                  "autotext": 'true',
-                  "subject": "Research",
-                  "html": "Hello, I am interested in this research. Please contact me."
-                  /*
-            "images": [
-              {
-              }
 
-                    ]
-          */
-              }
-        }
-  }).done(function(response) {
-   console.log(response); // if you're into that sorta thing
- });
-  alert("SENT");
-}
-  
 
-}
   //$(function() {
    //$("#envelope").click(test);
     /* $.ajax({
@@ -308,19 +292,8 @@ function test()
 
 
  <script >
-   src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+   src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"
    </script>
-  
-
-<script>
-var setEmail(emBool)
-{
-  if (emBool == false)
-  {
-
-  }
-}
-</script>
 
 <style>
     .container
