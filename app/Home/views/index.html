@@ -72,7 +72,7 @@
             </super-navigate>
             <i class = "icon super-heart-broken" style="font-size: 25px; float: right; padding-right: 10px" onclick="addDislikeNum('<%=testId%>')"></i>
             <i class = "icon super-heart" style="font-size: 25px; float: right; padding-right: 20px" onclick="addLikeNum('<%=testId%>')"></i>
-            <i class = "icon super-email" style="font-size: 25px; float: right; padding-right: 20px" onclick="sendEmail('<%=study%>', '<%=location%>')"></i>
+            <i class = "icon super-email" style="font-size: 25px; float: right; padding-right: 20px" onclick="sendEmail('<%=study%>', '<%=location%>', '<%=startdate_str%>', '<%=enddate_str%>')"></i>
           </div>
         </li>
       </div>
@@ -210,9 +210,7 @@
 
     }
 
-
-
-    function sendEmail(stu, loc)
+    function sendEmail(stu, loc, start, end)
     {
 
       var currentUser = Parse.User.current();
@@ -240,7 +238,8 @@
                       ],
                       "autotext": 'true',
                       "subject": "Research - " + stu,
-                      "html": "Hello, I am interested in the research study, " + stu + ", located at " + loc + ". Please contact me."
+                      "html": "Hello, I am interested in the research study, " + stu + ", located at " + loc + ", which starts from " +
+                      start + " and ends on " + end + ". Please contact me."
                   }
             }
       }).done(function(response) {
