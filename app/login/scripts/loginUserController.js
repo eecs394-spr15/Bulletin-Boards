@@ -1,7 +1,7 @@
 angular
   .module('login',[])
   .controller("loginUserController", ['$scope', function ($scope) {
-    $scope.login = { Username: "", Password: ""};
+    $scope.login = { Username: "", Password: "", Email: ""};
 //    $scope.continue = function($scope) {
 //        supersonic.ui.initialView.dismiss();
 //    }
@@ -33,6 +33,7 @@ angular
         var user = new Parse.User();
         user.set("username", this.user.Username);
         user.set("password", this.user.Password);
+        user.set("email", this.user.Email);
         
 //        var user = new Parse.User();
 //        user.set("username", "name");
