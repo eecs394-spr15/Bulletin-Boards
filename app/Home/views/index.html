@@ -210,9 +210,17 @@
 
     }
 
+
+
     function sendEmail(stu, loc)
     {
-      if(confirm("Are you sure you want to send the email?"))
+
+      var currentUser = Parse.User.current();
+      var currentUserName = currentUser.get("username")
+      var currentUserEmail = currentUser.get("email");
+      alert(currentUserName);
+      alert(currentUserEmail);
+      if(confirm("Are you sure you want to send the email?") && currentUser)
       {
       $.ajax(
       {
@@ -221,11 +229,11 @@
           data: {
             "key": "qgQsrDwIdACZ55h8AzrqIA",
             "message": {
-                "from_email": "varunk93@hotmail.com",
-                "from_name": "Student",
+                "from_email": currentUserEmail,
+                "from_name": currentUserName,
                 "to": [
                     {
-                        "email": "varunk93@hotmail.com",
+                        "email": "lukeahn2013@u.northwestern.edu",
                         "name": "Professor",
                         "type": "to",
                     }
@@ -239,6 +247,10 @@
        console.log(response); // if you're into that sorta thing
      });
       alert("SENT");
+    }
+    else
+    {
+      alert("please log in to send email")
     }
     }
 
