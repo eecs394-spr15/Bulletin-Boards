@@ -216,8 +216,6 @@
       var currentUser = Parse.User.current();
       var currentUserName = currentUser.get("username")
       var currentUserEmail = currentUser.get("email");
-      alert(currentUserName);
-      alert(currentUserEmail);
       if(confirm("Are you sure you want to send the email?") && currentUser)
       {
       $.ajax(
