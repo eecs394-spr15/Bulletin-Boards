@@ -111,7 +111,10 @@ supersonic.media.camera.getFromPhotoLibrary(options).then( function(result){
   file = new Parse.File("upload.jpeg", { base64: base64 });
   testObject.save({posterIcon: file}).then(function(object) {
   });
-  sleep(1);
+  sleep(1000);
+  alert("update successful");
+
+
   window.location.reload();
 });
 
@@ -135,7 +138,7 @@ supersonic.media.camera.getFromPhotoLibrary(options).then( function(result){
      testObject.save({dislikeNum: 0}).then(function(object) {
      });
 
-     alert("1");
+     alert("checkpoint");
 }
 </script>
 
