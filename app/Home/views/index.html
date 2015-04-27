@@ -22,8 +22,10 @@
         </div>
         <select id="sortSelect" onchange="sortEvents();" autocomplete="off">
           <option value="createdAt" selected>Most Recent</option>
-          <option value="compensation">Compensation</option>
-          <option value="duration">Duration</option>
+          <option value="COMP-HTL">Compensation (High to Low)</option>
+          <option value="COMP-LTH">Compensation (Low to High)</option>
+          <option value="DUR-STL">Duration (Short to Long)</option>
+          <option value="DUR-LTS">Duration (Long to Short)</option>
           <!--<option value="rating">Rating</option>-->
         </select>
       </label>
@@ -103,20 +105,62 @@
          $("#events").append(us_template(a));
      }
 
+/*
+     //Returns an array with arr[0] = 
+     function getSort()
+     {
+
+     }
+*/
+
      function sortEvents()
      {
-        //TODO: Allow ascending/descending?
 
          //Get sort order
          var ss = document.getElementById("sortSelect");  //Sorting select obj
          var sort_id = ss.options[ss.selectedIndex].value;   //Value of sorting selected
 
-         alert(sort_id);
+         if(sort_id == "createdAt")
+         {
+             //Sort events by sort_id option
+             eventList.sort(function(a, b) {
+                  return (a[sort_id] < b[sort_id]) ? -1 : ((a[sort_id] > b[sort_id]) ? 1 : 0);
+              });
+         }
+         else
+         {
+              var ascending = true;
 
-         //Sort events by sort_id option
-         eventList.sort(function(a, b) {
-              return (a[sort_id] < b[sort_id]) ? -1 : ((a[sort_id] > b[sort_id]) ? 1 : 0);
-          });
+             switch(sort_id)
+             {
+              case "COMP-HTL":
+                  sort_id = "compensation";
+                  ascending = false;
+              break;
+
+              case "COMP-LTH":
+                  sort_id = "compensation";
+                  ascending = true;
+              break;
+
+              case "DUR-STL":
+                  sort_id = "duration";
+                  ascending = true;
+              break;
+
+              case "DUR-LTS":
+                  sort_id = "duration";
+                  ascending = false;
+              break;
+              }
+
+             //Sort events by sort_id option
+             eventList.sort(function(a, b) {
+                  var av = ascending ? parseInt(a[sort_id], 10) : parseInt(b[sort_id], 10);
+                  var bv = ascending ? parseInt(b[sort_id], 10) : parseInt(a[sort_id], 10);
+                  return (av < bv) ? -1 : ((av > bv) ? 1 : 0);
+              });
+         }
 
          //Repopulate events div
          $("#events").empty();
@@ -136,9 +180,40 @@
        //Get sort order
        var ss = document.getElementById("sortSelect");  //Sorting select obj
        var sort_id = ss.options[ss.selectedIndex].value;   //Value of sorting selected
-           
-       //query.descending(sort);  //Get items sorted
-       query.descending(sort_id);
+
+        var ascending = true;
+
+       switch(sort_id)
+       {
+        case "createdAt":
+            ascending = false;
+            break;
+
+        case "COMP-HTL":
+            sort_id = "compensation";
+            ascending = false;
+            break;
+
+        case "COMP-LTH":
+            sort_id = "compensation";
+            ascending = true;
+            break;
+
+        case "DUR-STL":
+            sort_id = "duration";
+            ascending = true;
+            break;
+
+        case "DUR-LTS":
+            sort_id = "duration";
+            ascending = false;
+            break;
+        }
+
+        if(ascending)
+            query.ascending(sort_id);
+        else
+            query.descending(sort_id);
 
        query.find({
           success: function(results) {
