@@ -59,8 +59,8 @@
       <div>
         <li>
           <div class="item">
-
             <super-navigate location="studyInfo#studyInfo?objectId=<%=testId%>" data-params-id='<%=testId%>'>
+
               <div class="item-thumbnail-left">
               <img style= "position:absolute; top:35px;  border-width: 4px" height:80px; width: 80px; src = "<%=posterIcon._url%>" </img>
                 <div style="width:180px;word-break:break-word;">
@@ -71,7 +71,6 @@
                 <p style= "position:relative; right:20px;"><span><%=likeNum + " Like"%> <%=dislikeNum + " Dislike"%></span></p>
                 </div>
               </div>
-            </super-navigate>
             <i class = "icon super-heart-broken" style="font-size: 25px; float: right; padding-right: 10px" onclick="addDislikeNum('<%=testId%>')"></i>
             <i class = "icon super-heart" style="font-size: 25px; float: right; padding-right: 20px" onclick="addLikeNum('<%=testId%>')"></i>
             <i class = "icon super-email" style="font-size: 25px; float: right; padding-right: 20px" onclick="sendEmail('<%=study%>', '<%=location%>', '<%=startdate_str%>', '<%=enddate_str%>')"></i>
@@ -332,51 +331,12 @@
     }
 
 
+    function myFuction() {
+       alert("hey"); 
+    } 
+
    </script>
 
-
-   <script>
-
-
-
-
-
-
-  //$(function() {
-   //$("#envelope").click(test);
-    /* $.ajax({
-     type: "POST",
-     url: "https://mandrillapp.com/api/1.0/messages/send.json",
-  data: {
-    {
-    "key": "qgQsrDwIdACZ55h8AzrqIA",
-    "message": {
-        "html": "<p>Example HTML content</p>",
-        "text": "Example text content",
-        "subject": "example subject",
-        "from_email": "varunk93@hotmail.com",
-        "from_name": "Example Name",
-        "to": [
-            {
-                "email": "varunk93@hotmail.com",
-                "name": "Recipient Name",
-                "type": "to"
-            }
-        ],
-        "images": [
-            {
-            }
-        ]
-    },
-    "send_at": "4/22/15"
-}
-  }
- }).done(function(response) {
-   console.log(response); // if you're into that sorta thing
- });
-});
- }); */
-   </script>
 
 
  <script >

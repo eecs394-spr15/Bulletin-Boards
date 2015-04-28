@@ -58,9 +58,16 @@
     </form>
   </label>
 
+  <label class="item item-input item-floating-label">
+    <span class="input-label">Description</span>
+    <form name="formDescription">
+    <input type="text" name="Description" placeholder="Description">
+    </form>
+  </label>
+
 
   <div>
-    <button class="button button-block button-positive" onclick="addData( )">
+    <button class="button button-block button-positive" onclick="addData()">
 
       Confirm
     </button>
@@ -94,6 +101,8 @@ function sleep(milliseconds) {
      var startTime = document.forms["formStartTime"]["startTime"].value;
      var endTime = document.forms["formEndTime"]["endTime"].value;
      var email = document.forms["formEmail"]["email"].value;
+     var Description = document.forms["formDescription"]["Description"].value;
+
 
 
   var options = {
@@ -136,6 +145,8 @@ supersonic.media.camera.getFromPhotoLibrary(options).then( function(result){
      testObject.save({likeNum: 0}).then(function(object) {
      });
      testObject.save({dislikeNum: 0}).then(function(object) {
+     });
+     testObject.save({Description: Description}).then(function(object) {
      });
 
      alert("checkpoint");
