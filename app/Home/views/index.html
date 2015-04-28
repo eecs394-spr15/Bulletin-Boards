@@ -115,7 +115,6 @@
 
      function sortEvents()
      {
-
          //Get sort order
          var ss = document.getElementById("sortSelect");  //Sorting select obj
          var sort_id = ss.options[ss.selectedIndex].value;   //Value of sorting selected
@@ -177,9 +176,13 @@
 
      function getData()
      {
+      //alert("GETTING DATA");
+
        //Get sort order
        var ss = document.getElementById("sortSelect");  //Sorting select obj
        var sort_id = ss.options[ss.selectedIndex].value;   //Value of sorting selected
+
+      //alert(sort_id);
 
         var ascending = true;
 
@@ -214,6 +217,8 @@
             query.ascending(sort_id);
         else
             query.descending(sort_id);
+
+      //alert(sort_id);
 
        query.find({
           success: function(results) {

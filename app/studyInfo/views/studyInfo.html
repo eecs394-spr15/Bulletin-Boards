@@ -36,25 +36,60 @@
 
    <<div id = "events"></div>
 -->
-    <script type = "foo/bar" id = "eventTemplate">
 
-        <div class="list" ng-controller="IndexController">
-        
-        <a class="item" href="#studyInfo?objectId">
-        <h2><%=study%></h2>
-        <p id="Description"><%=Description%></p>
-        </a>
+<div>
+
+    <div class="item">
+
+        <div class="item-thumbnail-left">
+        <img id="study_icon" style= "position:absolute; top:35px;  border-width: 4px" height:80px; width: 80px; src="" </img>
+          <div style="width:180px;word-break:break-word;">
+          <h2 id = "study_p" style="position:relative; right:20px;"><%=study%></h2>
+          <p id = "comp_dur_p" style= "position:relative; right:20px;"></p>
+          <p id = "date_p" style= "position:relative; right:20px;"></p>
+          <p id="loc_p" style= "position:relative; right:20px;"></p>
+          <p id="like_p" style= "position:relative; right:20px;"></p>
+          </div>
         </div>
+    </div>
 
-    </script>
+</div>
 
+<!--
+  <script type = "foo/bar" id = "eventTemplate">
+
+     <div class="list" ng-controller="IndexController">
+      <div>
+        <li>
+          <div class="item">
+
+              <div class="item-thumbnail-left">
+              <img style= "position:absolute; top:35px;  border-width: 4px" height:80px; width: 80px; src = "<%=posterIcon._url%>" </img>
+                <div style="width:180px;word-break:break-word;">
+                <h2 style="position:relative; right:20px;"><%=study%></h2>
+                <p style= "position:relative; right:20px;"><span><%="$" + compensation%>, <%=duration%></span></p>
+                <p style= "position:relative; right:20px;"><span><%=startdate_str%><%=" ~ " +enddate_str%></span></p>
+                <p style= "position:relative; right:20px;"><span><%=location%></span></p>
+                <p style= "position:relative; right:20px;"><span><%=likeNum + " Like"%> <%=dislikeNum + " Dislike"%></span></p>
+                </div>
+              </div>
+            <i class = "icon super-heart-broken" style="font-size: 25px; float: right; padding-right: 10px" onclick="addDislikeNum('<%=testId%>')"></i>
+            <i class = "icon super-heart" style="font-size: 25px; float: right; padding-right: 20px" onclick="addLikeNum('<%=testId%>')"></i>
+            <i class = "icon super-email" style="font-size: 25px; float: right; padding-right: 20px" onclick="sendEmail('<%=study%>', '<%=location%>', '<%=startdate_str%>', '<%=enddate_str%>')"></i>
+          </div>
+        </li>
+      </div>
+
+  </script>
+-->
     <script type="text/javascript">
         Parse.initialize("susDpNWLgi3QqeprNxBKeQ7uIJK0srYlde52neVb", "OMWpK5Oa17fiNcDyTkqvbKz2HHL6szH4jPYXlhz0");
-        var template = $("#eventTemplate").html();
-        us_template = _.template(template);
-        var createEvent = function(a) {
-            $("#events").append(us_template(a));
-        }
+
+       // var template = $("#eventTemplate").html();
+        //us_template = _.template(template);
+        //var createEvent = function(a) {
+        //    $("#events").append(us_template(a));
+       // }
 
     var TestObject = Parse.Object.extend("TestObject");
     var testObject = new TestObject();
@@ -81,8 +116,21 @@
     query.get(GET["objectId"], {
                success: function(result) {
 
-                alert(result.attributes["location"]);
+                var object = result.attributes;
+               // alert(result.attributes["location"]);
+            // object.testId = results[i].id;
                 //document.write(result.Description);
+                //createEvent(object);
+
+                $("#study_p").text(object["study"]);
+                $("#study_icon").attr("src", object["posterIcon"]._url);
+
+                $("#comp_dur_p").text("$" + object["compensation"] + ", " + object["duration"])
+                $("#date_p").text(object["startdate_str"] + " ~ " + object["enddate_str"]);
+                $("#loc_p").text(object["location"]);
+
+                $("#like_p").text(object["likeNum"] + " Likes  " + object["dislikeNum"] + " Dislikes");
+
 
                //createEvent(result);
 /*
