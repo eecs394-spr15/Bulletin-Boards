@@ -2,9 +2,40 @@
     <script type="text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <script type="text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
+<div ng-controller="IndexController">
+
+  <super-navbar>
+    <super-navbar-title>
+    </super-navbar-title>
+  </super-navbar>
+
+<div id = "events"></div>
+
+<!--
+<script type = "foo/bar" id = "eventTemplate">
+
+<div class="list" ng-controller="IndexController">
+<a class="item" href="#studyInfo?objectId">
+<h1><%=study%></h1>
+    <h1>Number Quantity Prception</h1>
+    <img src = "<%=posterIcon._url%>" height = "80" width="80" style="top: 40px"</img>
+    <img src = "<%=posterIcon._url%>" height = "80" width="80" style="top: 40px"</img>
+    <h3>Lab: Visual Cognition Lab</h3>
+    <h3>Location: 112 Cresap</h3>
+    <h3>Dates: 4/20 - 6/15</h3>
+    <h3>Duration: 30 mins</h3>
+    <h3>Compensation: $10</h3>
+    <h3>Description: This study examines the different ways people encode locations of objects in a visuospatial environment. It involves performing a search task within grids of 16 objects.</h3>
+    </a>
+  </div>
+
+</div>
+
+ </div>
+>>>>>>> Stashed changes
 
    <<div id = "events"></div>
-
+-->
     <script type = "foo/bar" id = "eventTemplate">
 
         <div class="list" ng-controller="IndexController">
@@ -15,7 +46,7 @@
         </a>
         </div>
 
-        </script>
+    </script>
 
     <script type="text/javascript">
         Parse.initialize("susDpNWLgi3QqeprNxBKeQ7uIJK0srYlde52neVb", "OMWpK5Oa17fiNcDyTkqvbKz2HHL6szH4jPYXlhz0");
@@ -24,41 +55,95 @@
         var createEvent = function(a) {
             $("#events").append(us_template(a));
         }
+
     var TestObject = Parse.Object.extend("TestObject");
     var testObject = new TestObject();
     testObject.save({foo: "Frank124"}).then(function(object) {
                                             });
 
-                                            var EventObject = Parse.Object.extend("event");
-                                            var query = new Parse.Query(EventObject);
 
-                                            query.find({
-                                                       success: function(results) {
+    var GET = {};
+    var query = window.location.search.substring(1).split("&");
+    for (var i = 0, max = query.length; i < max; i++)
+    {
+        if (query[i] === "") // check for trailing & with no param
+            continue;
 
-                                                       for (var i = 0; i<results.length; i++)  //The length of data should be mutable
-                                                       {
+        var param = query[i].split("=");
+        GET[decodeURIComponent(param[0])] = decodeURIComponent(param[1] || "");
+    }
 
-                                                       var object = results[i].attributes;
-                                                       //test ID retrieval
-                                                       object.testId = results[i].id;
-
-                                                       //testForId = object.testId;
-
-                                                       createEvent(object);
-                                                       }
-
-                                                       document.getElementById("1").innerHTML = "success";
-                                                       },
-                                                       error: function(object, error) {
-
-                                                       document.getElementById("1").innerHTML = "error";
-                                                       }
-                                                       });
+    var EventObject = Parse.Object.extend("event");
+    var query = new Parse.Query(EventObject);
 
 
 
+    query.get(GET["objectId"], {
+               success: function(result) {
 
+                alert(result.attributes["location"]);
+                //document.write(result.Description);
 
+               //createEvent(result);
+/*
+               for (var i = 0; i<results.length; i++)  //The length of data should be mutable
+               {
+
+               var object = results[i].attributes;
+               //test ID retrieval
+               object.testId = results[i].id;
+
+               //testForId = object.testId;
+
+               createEvent(object);
+               }
+*/
+               //document.getElementById("1").innerHTML = "success";
+               },
+               error: function(object, error) {
+
+                alert("ERROR")
+               //document.getElementById("1").innerHTML = "error";
+               }
+               });
+
+/*
+    function addLikeNum(id) {
+         //alert("testForLike");
+         var EventForVote = Parse.Object.extend("event");
+         var query = new Parse.Query(EventForVote);
+         query.get(id,{
+                   success: function(results) {
+                   results.increment('likeNum');
+                   results.save();
+                   alert(results.get('likeNum'));
+                   alert(id);
+                   location.reload();
+                   },
+                   error: function(object, error) {
+                   //alert("Error");
+                   }
+                   });
+     };
+
+    function addDislikeNum(id) {
+        //alert("testForDislike");
+        var EventForVote = Parse.Object.extend("event");
+        var query = new Parse.Query(EventForVote);
+        query.get(id,{
+                  success: function(results) {
+                  results.increment('dislikeNum');
+                  results.save();
+                  alert(results.get('dislikeNum'));
+                  //alert(id);
+                  location.reload();
+                  },
+                  error: function(object, error) {
+                  alert("Error");
+                  }
+                  });
+    };
+*/
         </script>
 
 
