@@ -11,18 +11,20 @@
 
 
 <div>
-    <div class="item">
-        <div class="item-thumbnail-left">
+
+      <div class="item-thumbnail-left">
         <img id="study_icon" style= "position:absolute; top:35px;  border-width: 4px" height:80px; width: 80px; src="" </img>
           <div style="width:180px;word-break:break-word;">
-          <h2 id = "study_p" style="position:relative; right:20px;"><%=study%></h2>
+          <h2 id = "study_p" style="position:relative; right:20px;"></h2>
+
+          <h4 id="desc_p" style="position:relative; right:20px;"></h4>
+
           <p id = "comp_dur_p" style= "position:relative; right:20px;"></p>
           <p id = "date_p" style= "position:relative; right:20px;"></p>
           <p id="loc_p" style= "position:relative; right:20px;"></p>
           <p id="like_p" style= "position:relative; right:20px;"></p>
           </div>
         </div>
-    </div>
 
 </div>
 
@@ -63,6 +65,8 @@
 
                 $("#study_p").text(object["study"]);
                 $("#study_icon").attr("src", object["posterIcon"]._url);
+
+                $("#desc_p").text(object["Description"]);
 
                 $("#comp_dur_p").text("$" + object["compensation"] + ", " + object["duration"])
                 $("#date_p").text(object["startdate_str"] + " ~ " + object["enddate_str"]);
