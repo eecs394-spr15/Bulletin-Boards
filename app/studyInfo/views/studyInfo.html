@@ -9,38 +9,9 @@
     </super-navbar-title>
   </super-navbar>
 
-<div id = "events"></div>
-
-<!--
-<script type = "foo/bar" id = "eventTemplate">
-
-<div class="list" ng-controller="IndexController">
-<a class="item" href="#studyInfo?objectId">
-<h1><%=study%></h1>
-    <h1>Number Quantity Prception</h1>
-    <img src = "<%=posterIcon._url%>" height = "80" width="80" style="top: 40px"</img>
-    <img src = "<%=posterIcon._url%>" height = "80" width="80" style="top: 40px"</img>
-    <h3>Lab: Visual Cognition Lab</h3>
-    <h3>Location: 112 Cresap</h3>
-    <h3>Dates: 4/20 - 6/15</h3>
-    <h3>Duration: 30 mins</h3>
-    <h3>Compensation: $10</h3>
-    <h3>Description: This study examines the different ways people encode locations of objects in a visuospatial environment. It involves performing a search task within grids of 16 objects.</h3>
-    </a>
-  </div>
-
-</div>
-
- </div>
->>>>>>> Stashed changes
-
-   <<div id = "events"></div>
--->
 
 <div>
-
     <div class="item">
-
         <div class="item-thumbnail-left">
         <img id="study_icon" style= "position:absolute; top:35px;  border-width: 4px" height:80px; width: 80px; src="" </img>
           <div style="width:180px;word-break:break-word;">
@@ -55,33 +26,6 @@
 
 </div>
 
-<!--
-  <script type = "foo/bar" id = "eventTemplate">
-
-     <div class="list" ng-controller="IndexController">
-      <div>
-        <li>
-          <div class="item">
-
-              <div class="item-thumbnail-left">
-              <img style= "position:absolute; top:35px;  border-width: 4px" height:80px; width: 80px; src = "<%=posterIcon._url%>" </img>
-                <div style="width:180px;word-break:break-word;">
-                <h2 style="position:relative; right:20px;"><%=study%></h2>
-                <p style= "position:relative; right:20px;"><span><%="$" + compensation%>, <%=duration%></span></p>
-                <p style= "position:relative; right:20px;"><span><%=startdate_str%><%=" ~ " +enddate_str%></span></p>
-                <p style= "position:relative; right:20px;"><span><%=location%></span></p>
-                <p style= "position:relative; right:20px;"><span><%=likeNum + " Like"%> <%=dislikeNum + " Dislike"%></span></p>
-                </div>
-              </div>
-            <i class = "icon super-heart-broken" style="font-size: 25px; float: right; padding-right: 10px" onclick="addDislikeNum('<%=testId%>')"></i>
-            <i class = "icon super-heart" style="font-size: 25px; float: right; padding-right: 20px" onclick="addLikeNum('<%=testId%>')"></i>
-            <i class = "icon super-email" style="font-size: 25px; float: right; padding-right: 20px" onclick="sendEmail('<%=study%>', '<%=location%>', '<%=startdate_str%>', '<%=enddate_str%>')"></i>
-          </div>
-        </li>
-      </div>
-
-  </script>
--->
     <script type="text/javascript">
         Parse.initialize("susDpNWLgi3QqeprNxBKeQ7uIJK0srYlde52neVb", "OMWpK5Oa17fiNcDyTkqvbKz2HHL6szH4jPYXlhz0");
 
@@ -95,7 +39,6 @@
     var testObject = new TestObject();
     testObject.save({foo: "Frank124"}).then(function(object) {
                                             });
-
 
     var GET = {};
     var query = window.location.search.substring(1).split("&");
@@ -117,10 +60,6 @@
                success: function(result) {
 
                 var object = result.attributes;
-               // alert(result.attributes["location"]);
-            // object.testId = results[i].id;
-                //document.write(result.Description);
-                //createEvent(object);
 
                 $("#study_p").text(object["study"]);
                 $("#study_icon").attr("src", object["posterIcon"]._url);
@@ -131,22 +70,6 @@
 
                 $("#like_p").text(object["likeNum"] + " Likes  " + object["dislikeNum"] + " Dislikes");
 
-
-               //createEvent(result);
-/*
-               for (var i = 0; i<results.length; i++)  //The length of data should be mutable
-               {
-
-               var object = results[i].attributes;
-               //test ID retrieval
-               object.testId = results[i].id;
-
-               //testForId = object.testId;
-
-               createEvent(object);
-               }
-*/
-               //document.getElementById("1").innerHTML = "success";
                },
                error: function(object, error) {
 
@@ -156,6 +79,8 @@
                });
 
 /*
+
+
     function addLikeNum(id) {
          //alert("testForLike");
          var EventForVote = Parse.Object.extend("event");
