@@ -12,20 +12,17 @@
 
 <div>
 
-      <div class="item-thumbnail-left">
-        <img id="study_icon" style= "position:absolute; top:35px;  border-width: 4px" height:80px; width: 80px; src="" </img>
-          <div style="width:180px;word-break:break-word;">
-          <h2 id = "study_p" style="position:relative; right:20px;"></h2>
+          <div style="width:100%;word-break:break-word;">
+          <h2 id = "study_p" style="position:relative; margin-left:10px; margin-right:10px;"></h2>
 
-          <h4 id="desc_p" style="position:relative; right:20px;"></h4>
-
-          <p id = "comp_dur_p" style= "position:relative; right:20px;"></p>
-          <p id = "date_p" style= "position:relative; right:20px;"></p>
-          <p id="loc_p" style= "position:relative; right:20px;"></p>
-          <p id="like_p" style= "position:relative; right:20px;"></p>
+          <h4 id="desc_p" style="position:relative; margin-left:10px; margin-right:10px;"></h4>
+          
+          <!--<h4 style="margin-left:10px; margin-top: 30px;">
+              Sign up: send automated email to the lab
+          </h4>
+          <i class = "icon super-email" style="font-size: 50px; margin-left:10px;" onclick="sendEmail('<%=study%>', '<%=location%>', '<%=startdate_str%>', '<%=enddate_str%>')"></i> -->
           </div>
         </div>
-
 </div>
 
     <script type="text/javascript">
@@ -121,6 +118,48 @@
                   });
     };
 */
+    
+    function sendEmail(stu, loc, start, end)
+    {
+        
+        var currentUser = Parse.User.current();
+        var currentUserName = currentUser.get("username")
+        var currentUserEmail = currentUser.get("email");
+        if(confirm("Are you sure you want to send the email?") && currentUser)
+        {
+            $.ajax(
+                   {
+                   type: "POST",
+                   url: "https://mandrillapp.com/api/1.0/messages/send.json",
+                   data: {
+                   "key": "qgQsrDwIdACZ55h8AzrqIA",
+                   "message": {
+                   "from_email": currentUserEmail,
+                   "from_name": currentUserName,
+                   "to": [
+                          {
+                          "email": "lukeahn2013@u.northwestern.edu",
+                          "name": "Professor",
+                          "type": "to",
+                          }
+                          ],
+                   "autotext": 'true',
+                   "subject": "Research - " + stu,
+                   "html": "Hello, I am interested in the research study, " + stu + ", located at " + loc + ", which starts from " +
+                   start + " and ends on " + end + ". Please contact me."
+                   }
+                   }
+                   }).done(function(response) {
+                           console.log(response); // if you're into that sorta thing
+                           });
+                           alert("SENT");
+        }
+        else
+        {
+            alert("please log in to send email")
+        }
+    }
+    
         </script>
 
 
