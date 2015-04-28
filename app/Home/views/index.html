@@ -1,5 +1,7 @@
 <html>
-
+<head>
+  <meta http-equiv="refresh" content="300">
+</head>
 <!--includes-->
 <script type="text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 <script type="text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -41,27 +43,14 @@
   <ul class="list" ng-hide="events.length == 0">
 
      <div class="list" ng-controller="IndexController">
-     <!--
-        <a class="item item-thumbnail-left" href="#">
-          <img src = "<%=posterIcon._url%>" height = "80" width="80" </img>
-          <h2><%=study%></h2>
-          <p><%="$" + compensation%>, <%=duration%></p>
-          <p><%=location%></p>
-          <p><%="Start date: " +startdate_str%></p>
-          <p><%="End date: " + enddate_str%></p>
-          <p><%=likeNum + " Likes"%> <%=dislikeNum + " Dislikes"%></p>
-          <p><%=email%></p>
-          <p>
-              <span type = "button" id = "envelope" class = "icon super-email" style="font-size: 25px; float: right; padding: 10px" onclick = "test()"></span>
-          </p>
-        </a>
--->
       <div>
         <li>
           <div class="item">
+
             <super-navigate location="studyInfo#studyInfo?objectId=<%=testId%>" data-params-id='<%=testId%>'>
               <div class="item-thumbnail-left">
               <img style= "position:absolute; top:35px;  border-width: 4px" height:80px; width: 80px; src = "<%=posterIcon._url%>" </img>
+              </super-navigate>
                 <div style="width:180px;word-break:break-word;">
                 <h2 style="position:relative; right:20px;"><%=study%></h2>
                 <p style= "position:relative; right:20px;"><span><%="$" + compensation%>, <%=duration%></span></p>
@@ -74,21 +63,22 @@
             <i class = "icon super-heart" style="font-size: 25px; float: right; padding-right: 20px" onclick="addLikeNum('<%=testId%>')"></i>
             <i class = "icon super-email" style="font-size: 25px; float: right; padding-right: 20px" onclick="sendEmail('<%=study%>', '<%=location%>', '<%=startdate_str%>', '<%=enddate_str%>')"></i>
           </div>
-        </li>
-      </div>
-
-
-    </ul>
+       </li>
+      </div>  
+    </div>
+  </ul>
 
   </script>
 
   <script type="text/javascript">
+  //refresh upon new poster update
+  setInterval(checkItems, 2000);
+  checkItems();
+    
+
     //Initialize/test Parse
     Parse.initialize("susDpNWLgi3QqeprNxBKeQ7uIJK0srYlde52neVb", "OMWpK5Oa17fiNcDyTkqvbKz2HHL6szH4jPYXlhz0");
-     var TestObject = Parse.Object.extend("TestObject");
-     var testObject = new TestObject();
-     testObject.save({foo: "Frank124"}).then(function(object) {
-     });
+
 
      //Create event template
      var template = $("#eventTemplate").html();
@@ -102,14 +92,6 @@
          eventList.push(a);
          $("#events").append(us_template(a));
      }
-
-/*
-     //Returns an array with arr[0] = 
-     function getSort()
-     {
-
-     }
-*/
 
      function sortEvents()
      {
@@ -174,13 +156,11 @@
 
      function getData()
      {
-      //alert("GETTING DATA");
 
        //Get sort order
        var ss = document.getElementById("sortSelect");  //Sorting select obj
        var sort_id = ss.options[ss.selectedIndex].value;   //Value of sorting selected
 
-      //alert(sort_id);
 
         var ascending = true;
 
@@ -256,7 +236,6 @@
         success: function(results) {
           results.increment('likeNum');
           results.save();
-          alert(results.get('likeNum'));
           //alert(id);
           location.reload();
      },
@@ -277,7 +256,6 @@
         success: function(results) {
           results.increment('dislikeNum');
           results.save();
-          alert(results.get('dislikeNum'));
           //alert(id);
           location.reload();
      },
@@ -287,6 +265,20 @@
     });
 
     }
+    function checkItems(){
+     
+       var refresh = localStorage.getItem('refresh');
+        if (refresh == 1)
+        {
+          window.location.reload();
+          refresh = 0;
+          localStorage.setItem('refresh', refresh);
+  }
+
+    }
+
+
+
 
     function sendEmail(stu, loc, start, end)
     {
@@ -329,18 +321,13 @@
     }
     }
 
-
-    function myFuction() {
-       alert("hey"); 
-    } 
-
    </script>
 
 
 
- <script >
+<script >
    src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"
-   </script>
+</script>
 
 <style>
     .container
@@ -358,7 +345,5 @@
         display: inline !important;
     }
 </style>
-
-
 
 </html>
