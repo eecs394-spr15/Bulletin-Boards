@@ -287,10 +287,12 @@
 
     function sendEmail(stu, loc, start, end)
     {
-
+      //use ajax call with a mandrill library to
+      //send emails automatically
       var currentUser = Parse.User.current();
       var currentUserName = currentUser.get("username")
       var currentUserEmail = currentUser.get("email");
+      //asks to send via confirmation
       if(confirm("Are you sure you want to send the email?") && currentUser)
       {
       $.ajax(
@@ -300,6 +302,7 @@
           data: {
             "key": "qgQsrDwIdACZ55h8AzrqIA",
             "message": {
+                //variables accessed from parse
                 "from_email": currentUserEmail,
                 "from_name": currentUserName,
                 "to": [
