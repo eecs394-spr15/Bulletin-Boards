@@ -1,9 +1,7 @@
-
 <head>
 <script type="text/javascript">
     Parse.initialize("susDpNWLgi3QqeprNxBKeQ7uIJK0srYlde52neVb", "OMWpK5Oa17fiNcDyTkqvbKz2HHL6szH4jPYXlhz0");
     function codeAddress() {
-
     var currentUser = Parse.User.current();
       if (currentUser) {
           document.getElementById("Greeting").innerHTML = "Hello, " + currentUser.get("username");
@@ -15,9 +13,7 @@
           document.getElementById("logbutton").innerHTML =  "<i class='icon super-person-add'></i>" + "Login or Signup";
           document.getElementById("profile").style.visibility = 'hidden';
       }}
-
       function log(){
-
         var currentUser = Parse.User.current();
         if (currentUser) {
           Parse.User.logOut();
@@ -29,9 +25,7 @@
           supersonic.ui.initialView.show();
       
       }}
-
       window.onload = codeAddress;
-
 </script>
 </head>
 
@@ -60,9 +54,6 @@
 </a> -->
 </div>
 </div>
-
-
-
 
 
 

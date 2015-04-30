@@ -12,7 +12,7 @@
     <div class="list">
       <!--<label class="item item-input">-->
           <img src="/imags/NUwildcats.png" width="50px"; height="40px" style="float:left;">
-          <div style="margin-left:50px; margin-top:10px; color:#9933ff; font-weight:bold; font-size:150%;">
+          <div style="margin-left:50px; margin-top:10px; color:#9933ff; font-weight:bold; font-size:150%; padding-left:40px">
           NU Bulletin Board
           </div>
       <!--</label>-->
@@ -39,18 +39,13 @@
 </body>
 
   <script type = "foo/bar" id = "eventTemplate">
-
-  <ul class="list" ng-hide="events.length == 0">
-
-     <div class="list" ng-controller="IndexController">
-      <div>
+    <ul class="list" ng-hide="events.length == 0" ng-controller="IndexController">
+      <div  >
         <li>
           <div class="item">
-
             <super-navigate location="studyInfo#studyInfo?objectId=<%=testId%>" data-params-id='<%=testId%>'>
               <div class="item-thumbnail-left">
               <img style= "position:absolute; top:35px;  border-width: 4px" height:80px; width: 80px; src = "<%=posterIcon._url%>" </img>
-              </super-navigate>
                 <div style="width:180px;word-break:break-word;">
                 <h2 style="position:relative; right:20px;"><%=study%></h2>
                 <p style= "position:relative; right:20px;"><span><%="$" + compensation%>, <%=duration%></span></p>
@@ -59,15 +54,16 @@
                 <p style= "position:relative; right:20px;"><span><%=likeNum + " Like"%> <%=dislikeNum + " Dislike"%></span></p>
                 </div>
               </div>
+            </super-navigate>
             <i class = "icon super-heart-broken" style="font-size: 25px; float: right; padding-right: 10px" onclick="addDislikeNum('<%=testId%>')"></i>
             <i class = "icon super-heart" style="font-size: 25px; float: right; padding-right: 20px" onclick="addLikeNum('<%=testId%>')"></i>
             <i class = "icon super-email" style="font-size: 25px; float: right; padding-right: 20px" onclick="sendEmail('<%=study%>', '<%=location%>', '<%=startdate_str%>', '<%=enddate_str%>')"></i>
           </div>
-       </li>
-      </div>  
-    </div>
-  </ul>
+        </li>
+      </div>
+      </ul>
 
+  
   </script>
 
   <script type="text/javascript">
@@ -237,6 +233,12 @@
           results.increment('likeNum');
           results.save();
           //alert(id);
+          var start = new Date().getTime();
+          for (var i = 0; i < 1e7; i++) {
+            if ((new Date().getTime() - start) > 1000){
+              break;
+            }
+          }
           location.reload();
      },
        error: function(object, error) {
@@ -257,6 +259,12 @@
           results.increment('dislikeNum');
           results.save();
           //alert(id);
+          var start = new Date().getTime();
+          for (var i = 0; i < 1e7; i++) {
+            if ((new Date().getTime() - start) > 1000){
+              break;
+            }
+          }
           location.reload();
      },
        error: function(object, error) {
