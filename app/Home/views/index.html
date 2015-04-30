@@ -288,7 +288,8 @@
       var currentUserName = currentUser.get("username")
       var currentUserEmail = currentUser.get("email");
       //asks to send via confirmation
-      if(confirm("Are you sure you want to send the email?") && currentUser)
+      if(confirm("Are you sure you want to send the lab manager an 
+        email to sign up?") && currentUser)
       {
       $.ajax(
       {
@@ -303,7 +304,7 @@
                 "from_name": currentUserName,
                 "to": [
                     {
-                        "email": "lukeahn2013@u.northwestern.edu",
+                        "email": "varunkumar2016@u.northwestern.edu",
                         "name": "Professor",
                         "type": "to",
                     }
